@@ -1,63 +1,41 @@
-from skimage import io
-import math
+import stripe
 import turtle as tt
+import svgwrite
+from svg_turtle import SvgTurtle
+import cairosvg
 
-FILE_NAME = './duck_green.png'
-OUT_FILE  = './duck_green.h'
-
-
-#################################
-#  Do not move the code below   #
-#################################
-
-LED_NUM = 8
-def picture2Lines(picture, output, num) :
-    pic = io.imread(picture).astype('int')
-
-    height, width, _ = pic.shape
-    radius = min(height, width) // 2
-    center = (width // 2, height // 2)
-
-    with open(output,'w') as f :
-        f.write('const int STRIPE_NUM = ' + str(num) + ';\n')
-
-        f.write('const byte lines')
-        f.write('[' + str(num) + ']')
-        f.write('[' + str(LED_NUM) + ']')
-        f.write('[3]')
-
-        f.write(' = {\n')
-
-        for i in range(num) :
-            theta = 3/2 * math.pi - 2* math.pi / num * i # 270 - degree
-            f.write('{')
-
-            for j in range(LED_NUM) : # LED number
-                r = radius / LED_NUM * (j+1) /2 + radius /2
-                x = int(center[0] + r*math.cos(theta) + 0.5)
-                y = int(center[1] + r*math.sin(theta) + 0.5)
-
-                if x >= width : x = width-1
-                if x < 0 : x = 0
-                if y >= height : y = height-1
-                if y < 0 : y = 0
-
-                pixel = pic[y][x]
-
-                f.write('{' + str(pixel[0]) + ',' + str(pixel[1]) + ',' + str(pixel[2]) + '}')
-                if j != LED_NUM -1 : f.write(',')
-
-            f.write('}')
-            if i != num -1 : f.write(',')
-            f.write('\n')
-
-        f.write('};\n')
-
-def turtle2lines(output, num) :
-        tt.getscreen().getcanvas().postscript(file='.temp.ps')
-        picture2Lines('.temp.ps', output, num)
+#turtle
+tt.forward(200)
+tt.done()
 
 
+# turtle2fan
 
-if __name__ == '__main__':
-    picture2Lines(FILE_NAME, OUT_FILE, 64)
+OUTPUT_FILE = 'picture.h' # modify this line
+TEMP_FILE = 'temp'
+drawing = svgwrite.Drawing(TEMP_FILE + '.svg', size=("500px", "500px"))
+drawing.add(drawing.rect(fill='white', size=("100%", "100%")))
+t = SvgTurtle(drawing)
+tt.Turtle._screen = t.screen
+tt.Turtle._pen = t
+
+############################
+# draw your picture below  #
+############################
+
+tt.fillcolor('blue')
+tt.begin_fill()
+for i in range(20):
+    d = 50 + i*i*1.5
+    tt.pencolor(0, 0.05*i, 0)
+    tt.width(i)
+    tt.forward(d)
+    tt.right(144)
+tt.end_fill()
+
+############################
+# draw your picture above  #
+############################
+drawing.save()
+cairosvg.svg2png(url=TEMP_FILE + '.svg', write_to=TEMP_FILE + '.png')
+stripe.picture2Lines(TEMP_FILE + '.png', OUTPUT_FILE, 64)

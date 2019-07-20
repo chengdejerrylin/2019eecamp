@@ -65,91 +65,70 @@ void setup() {
   DDRB &= B11011111;      //13 input
   PORTD &= B00000011;     //2 to 7 LOW
   PORTB &= B00000000;     //8 to 13 LOW
+
+  displayString("evolve",delayTime);
+  pinMode(13, OUTPUT);
 }
 
 
 
 void draw_a_line(int this_line){
-int now_line;
-now_line = this_line;
-if (now_line>=128){PORTD |= B00100000;  now_line-=128;} else {PORTD &= B11011111;}
-if (now_line>=64) {PORTD |= B01000000;  now_line-=64;}  else {PORTD &= B10111111;}
-if (now_line>=32) {PORTD |= B10000000;  now_line-=32;}  else {PORTD &= B01111111;}
-if (now_line>=16) {PORTB |= B00000001;  now_line-=16;}  else {PORTB &= B11111110;}
-if (now_line>=8)  {PORTB |= B00000010;  now_line-=8;}   else {PORTB &= B11111101;}
-if (now_line>=4)  {PORTB |= B00000100;  now_line-=4;}   else {PORTB &= B11111011;}
-if (now_line>=2)  {PORTB |= B00001000;  now_line-=2;}   else {PORTB &= B11110111;}
-if (now_line>=1)  {PORTB |= B00010000;  now_line-=1;}   else {PORTB &= B11101111;}
+  int now_line;
+  now_line = this_line;
+  if (now_line>=128){PORTD |= B00100000;  now_line-=128;} else {PORTD &= B11011111;}
+  if (now_line>=64) {PORTD |= B01000000;  now_line-=64;}  else {PORTD &= B10111111;}
+  if (now_line>=32) {PORTD |= B10000000;  now_line-=32;}  else {PORTD &= B01111111;}
+  if (now_line>=16) {PORTB |= B00000001;  now_line-=16;}  else {PORTB &= B11111110;}
+  if (now_line>=8)  {PORTB |= B00000010;  now_line-=8;}   else {PORTB &= B11111101;}
+  if (now_line>=4)  {PORTB |= B00000100;  now_line-=4;}   else {PORTB &= B11111011;}
+  if (now_line>=2)  {PORTB |= B00001000;  now_line-=2;}   else {PORTB &= B11110111;}
+  if (now_line>=1)  {PORTB |= B00010000;  now_line-=1;}   else {PORTB &= B11101111;}
 }
-
-
-
-
-
-
-
-
 
 void displayChar(char cr, float line_delay){
-if (cr == 'a'){for (int i = 0; i <5; i++){draw_a_line(a[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'b'){for (int i = 0; i <5; i++){draw_a_line(b[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'c'){for (int i = 0; i <5; i++){draw_a_line(c[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'd'){for (int i = 0; i <5; i++){draw_a_line(d[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'e'){for (int i = 0; i <5; i++){draw_a_line(e[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'f'){for (int i = 0; i <5; i++){draw_a_line(f[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'g'){for (int i = 0; i <5; i++){draw_a_line(g[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'h'){for (int i = 0; i <5; i++){draw_a_line(h[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'i'){for (int itr = 0; itr <3; itr++){draw_a_line(i[itr]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'j'){for (int i = 0; i <5; i++){draw_a_line(j[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'k'){for (int i = 0; i <5; i++){draw_a_line(k[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'l'){for (int i = 0; i <5; i++){draw_a_line(l[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'm'){for (int i = 0; i <5; i++){draw_a_line(m[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'n'){for (int i = 0; i <5; i++){draw_a_line(n[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'o'){for (int i = 0; i <5; i++){draw_a_line(o[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'p'){for (int i = 0; i <5; i++){draw_a_line(p[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'q'){for (int i = 0; i <5; i++){draw_a_line(q[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'r'){for (int i = 0; i <5; i++){draw_a_line(r[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 's'){for (int i = 0; i <5; i++){draw_a_line(s[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 't'){for (int i = 0; i <5; i++){draw_a_line(t[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'u'){for (int i = 0; i <5; i++){draw_a_line(u[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'v'){for (int i = 0; i <5; i++){draw_a_line(v[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'w'){for (int i = 0; i <5; i++){draw_a_line(w[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'x'){for (int i = 0; i <5; i++){draw_a_line(x[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'y'){for (int i = 0; i <5; i++){draw_a_line(y[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == 'z'){for (int i = 0; i <5; i++){draw_a_line(z[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == '!'){for (int i = 0; i <3; i++){draw_a_line(excl[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == '?'){for (int i = 0; i <5; i++){draw_a_line(ques[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-if (cr == '.'){for (int i = 0; i <4; i++){draw_a_line(eos[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
-delayMicroseconds(line_delay*2);
+  if (cr == 'a'){for (int i = 0; i <5; i++){draw_a_line(a[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'b'){for (int i = 0; i <5; i++){draw_a_line(b[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'c'){for (int i = 0; i <5; i++){draw_a_line(c[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'd'){for (int i = 0; i <5; i++){draw_a_line(d[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'e'){for (int i = 0; i <5; i++){draw_a_line(e[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'f'){for (int i = 0; i <5; i++){draw_a_line(f[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'g'){for (int i = 0; i <5; i++){draw_a_line(g[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'h'){for (int i = 0; i <5; i++){draw_a_line(h[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'i'){for (int itr = 0; itr <3; itr++){draw_a_line(i[itr]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'j'){for (int i = 0; i <5; i++){draw_a_line(j[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'k'){for (int i = 0; i <5; i++){draw_a_line(k[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'l'){for (int i = 0; i <5; i++){draw_a_line(l[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'm'){for (int i = 0; i <5; i++){draw_a_line(m[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'n'){for (int i = 0; i <5; i++){draw_a_line(n[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'o'){for (int i = 0; i <5; i++){draw_a_line(o[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'p'){for (int i = 0; i <5; i++){draw_a_line(p[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'q'){for (int i = 0; i <5; i++){draw_a_line(q[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'r'){for (int i = 0; i <5; i++){draw_a_line(r[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 's'){for (int i = 0; i <5; i++){draw_a_line(s[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 't'){for (int i = 0; i <5; i++){draw_a_line(t[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'u'){for (int i = 0; i <5; i++){draw_a_line(u[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'v'){for (int i = 0; i <5; i++){draw_a_line(v[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'w'){for (int i = 0; i <5; i++){draw_a_line(w[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'x'){for (int i = 0; i <5; i++){draw_a_line(x[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'y'){for (int i = 0; i <5; i++){draw_a_line(y[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == 'z'){for (int i = 0; i <5; i++){draw_a_line(z[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == '!'){for (int i = 0; i <3; i++){draw_a_line(excl[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == '?'){for (int i = 0; i <5; i++){draw_a_line(ques[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  if (cr == '.'){for (int i = 0; i <4; i++){draw_a_line(eos[i]);delayMicroseconds(line_delay);}draw_a_line(0);}
+  delayMicroseconds(line_delay*2);
 }
-
-
-
 
 void displayString(char* s, float line_delay){
-for (int i = 0; i<=strlen(s); i++){
-displayChar(s[i],line_delay);
+  for (int i = 0; i<=strlen(s); i++){
+    displayChar(s[i],line_delay);
+  }
 }
-}
-
-
-
-
 
 void loop() {
-
-  currentMillis = micros();
-  elapsed_loop_counter = currentMillis - previousMillis;
-  delayTime = time_per_deg*6; //we want 2 degrees for each line of the letters   
-
-  //This if here is to make sure I'll start printing at 216 deg so the text will be centered.
-  if((elapsed_loop_counter >=  time_per_deg*(180)) && (elapsed_loop_counter <  time_per_deg*(181)) &&  text_ok)
-  { 
-  //displayString("electronoobs.",delayTime);
-  displayString("evolve",delayTime);
-  //delayMicroseconds(delayTime*10);
-  text_ok=0;
-  }
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
 }
 
 
