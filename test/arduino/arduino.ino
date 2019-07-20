@@ -65,6 +65,8 @@ void setup()
   DDRB &= B11101111; //12 input
 
   //PORTB &= B10111110; //8 to 13 LOW
+  displayString("abcdefg", delayTime);
+  pinMode(13, OUTPUT);
 }
 
 void draw_a_line(int this_line)
@@ -365,25 +367,10 @@ void loop()
   elapsed_loop_counter = currentMillis - previousMillis;
   delayTime = time_per_deg *2 ; //we want 2 degrees for each line of the letters
 
-  //This if here is to make sure I'll start printing at 216 deg so the text will be centered.
-  if ((elapsed_loop_counter >= time_per_deg * (216)) && (elapsed_loop_counter < time_per_deg * (217)) && text_ok)
-  {
-    displayString("abcdefg", delayTime);
-    //delayMicroseconds(delayTime*10);
-    text_ok = 0;
-  }
-
-/*
-  //This if here is to make sure I'll start printing at 216 deg so the text will be centered.
-  currentMillis = micros();
-  elapsed_loop_counter = currentMillis - previousMillis;
-  delayTime = 2000;
-  //if ((elapsed_loop_counter >= 10 * (216)) && (elapsed_loop_counter < 10 * (217)) && text_ok)
-  //{
-    displayString("ntuee", delayTime);
-    //delayMicroseconds(delayTime*10);
-    //text_ok = 0;
-  //}*/
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
 }
 
 ISR(PCINT0_vect)
