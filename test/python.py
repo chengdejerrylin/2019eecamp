@@ -2,7 +2,9 @@ import stripe
 import turtle as tt
 import svgwrite
 from svg_turtle import SvgTurtle
-import cairosvg
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPDF, renderPM
+#import cairosvg
 
 #turtle
 tt.forward(200)
@@ -37,5 +39,7 @@ tt.end_fill()
 # draw your picture above  #
 ############################
 drawing.save()
-cairosvg.svg2png(url=TEMP_FILE + '.svg', write_to=TEMP_FILE + '.png')
+drawing = svg2rlg(TEMP_FILE + ".svg")
+renderPM.drawToFile(drawing, TEMP_FILE + ".png", fmt="PNG")
+#cairosvg.svg2png(url=TEMP_FILE + '.svg', write_to=TEMP_FILE + '.png')
 stripe.picture2Lines(TEMP_FILE + '.png', OUTPUT_FILE, 64)
